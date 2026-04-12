@@ -1,7 +1,5 @@
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 public class Projetil {
     public int posX;
@@ -31,7 +29,6 @@ public class Projetil {
     public void disparoProjetil() {
 
         try {
-            // img = Recursos.getInstanse().cortarImagem(150, 148, 220, 180, sprite);
             img = Recursos.getInstanse().cortarImagem(650, 160, 760, 192, sprite);
         } catch (Exception e) {
             e.printStackTrace();
