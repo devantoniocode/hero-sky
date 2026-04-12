@@ -26,14 +26,13 @@ public class EnemyPlane {
         try {
             sprite = ImageIO.read(getClass().getResource("imgs/sprite_plane.png"));
             img = Recursos.getInstanse().cortarImagem(422, 100, 601, 212, sprite);
-            img_kill = Recursos.getInstanse().cortarImagem(3, 100, 110, 203, sprite);
         } catch (Exception e) {
             System.out.println("Erro ao carregar imagem da bola!");
         }
     }
 
     public java.awt.Rectangle getBounds() {
-        return new java.awt.Rectangle(posX, posY, 100, 80);
+        return new java.awt.Rectangle(posX, posY, 100, 100);
     }
 
 }
