@@ -12,6 +12,8 @@ public class HeroPlane {
     private long tempoUltimaTrocaVoo = 0;
     private long tempoUltimaTrocaDisparo = 0;
 
+    public int largura;
+    public int altura;
     public int posX;
     public int posY;
     public int raio;
@@ -34,6 +36,8 @@ public class HeroPlane {
         posY = 100;
         velX = 0;
         velY = 0;
+        largura = 135;
+        altura = 50;
 
         try {
             sprite = ImageIO.read(getClass().getResource("imgs/sprite_plane.png"));
