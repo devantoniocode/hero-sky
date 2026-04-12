@@ -8,7 +8,7 @@ public class Principal{
      public static final int ALTURA_TELA = 720;
      
     public static void main(String[] args){
-        JFrame janela = new JFrame("Jogo 2D");
+        JFrame janela = new JFrame("Hero Sky");
         
         Game game = new Game();
         game.setPreferredSize(new Dimension(LARGURA_TELA,ALTURA_TELA) );

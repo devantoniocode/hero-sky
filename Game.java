@@ -16,9 +16,6 @@ import javax.swing.JFrame;
 public class Game extends JPanel {
     public HeroPlane heroi;
     public EnemyPlane[] inimigo;
-    public BufferedImage imgAtual;
-    public BufferedImage imgInimigo;
-    public BufferedImage imgDisparo;
 
     public Sky sky_A;
     public Sky sky_B;
@@ -42,7 +39,6 @@ public class Game extends JPanel {
     public int posYDisparo = 0;
     public int aux_inimigo_abatido = 0;
     public int count_abates = 0;
-    public String xxx;
 
     ArrayList<EnemyPlane> inimigosAbatidos = new ArrayList<EnemyPlane>();
     ArrayList<EnemyPlane> inimigosColidiu = new ArrayList<EnemyPlane>();
@@ -52,8 +48,8 @@ public class Game extends JPanel {
     public BufferedImage spriteExplosao;
 
     public Game() {
-        setFocusable(true); 
-        setLayout(null); 
+        setFocusable(true);
+        setLayout(null);
 
         addKeyListener(new KeyListener() {
             @Override
@@ -146,7 +142,7 @@ public class Game extends JPanel {
         while (true) {
             handlerEvents();
             update();
-            repaint(); 
+            repaint();
             try {
                 Thread.sleep(16); // ~60 FPS
             } catch (InterruptedException e) {
@@ -172,9 +168,11 @@ public class Game extends JPanel {
     }
 
     public void disparar() {
+        heroi.disparando = true;
+        heroi.frameDisparoAtual = 0;
         Projetil p = new Projetil();
-        p.posX = heroi.posX + 80; 
-        p.posY = heroi.posY + 30; 
+        p.posX = heroi.posX + 80;
+        p.posY = heroi.posY + 65;
         p.velX = 10;
         p.disparoProjetil();
         listaProjeteis.add(p);
@@ -207,15 +205,15 @@ public class Game extends JPanel {
                     e.posY = new Random().nextInt(600);
 
                     listaProjeteis.remove(i);
-                    i--; 
+                    i--;
                     count_abates++;
-                    break; 
+                    break;
                 }
             }
         }
 
         for (EnemyPlane e : inimigo) {
-            e.posX -= 3; 
+            e.posX -= 3;
 
             if (e.posX < -100) {
                 e.posX = 1300;
@@ -223,8 +221,8 @@ public class Game extends JPanel {
             }
 
             if (heroi.getBounds().intersects(e.getBounds())) {
-                heroi.hp -= 20; 
-                listaExplosoes.add(new Explosao(e.posX, e.posY, spriteExplosao)); 
+                heroi.hp -= 20;
+                listaExplosoes.add(new Explosao(e.posX, e.posY, spriteExplosao));
 
                 e.posX = 1300 + new Random().nextInt(400);
 
@@ -243,34 +241,13 @@ public class Game extends JPanel {
             expo.update();
             if (expo.finalizada) {
                 listaExplosoes.remove(k);
-                k--; 
+                k--;
             }
         }
     }
 
     public void render() {
-        repaint(); 
-    }
-
-    public void testaColisoesxxx() {
-        for (int i = 0; i < inimigo.length; i++) {
-            if ((heroi.posX + (heroi.raio * 2) == inimigo[i].posX)) {
-                inimigosColidiu.add(inimigo[i]);
-                colidiu = true;
-            }
-        }
-        if (heroi.posX + (heroi.raio * 2) >= Principal.LARGURA_TELA) {
-            heroi.posX = heroi.posX - heroi.velX;
-        }
-        if (heroi.posX <= 0) {
-            heroi.posX = heroi.posX - heroi.velX;
-        }
-        if (heroi.posY + (heroi.raio * 2) >= Principal.ALTURA_TELA) {
-            heroi.posY = heroi.posY - heroi.velY;
-        }
-        if (heroi.posY <= 0) {
-            heroi.posY = heroi.posY - heroi.velY;
-        }
+        repaint();
     }
 
     @Override
@@ -286,8 +263,11 @@ public class Game extends JPanel {
         g.drawImage(mountain_A.img, mountain_A.posX, mountain_A.posY, null);
         g.drawImage(mountain_B.img, mountain_B.posX, mountain_B.posY, null);
 
+        long tempoAgora = System.currentTimeMillis();
+
+        BufferedImage imgHeroi = heroi.getImagemParaDesenhar(tempoAgora);
         if (heroi.hp > 0) {
-            g.drawImage(heroi.img, heroi.posX, heroi.posY, null);
+            g.drawImage(imgHeroi, heroi.posX, heroi.posY, null);
         }
 
         for (Projetil p : listaProjeteis) {
@@ -310,7 +290,7 @@ public class Game extends JPanel {
         g.fillRect(20, 20, 200, 20);
 
         g.setColor(Color.GREEN);
-        int larguraVida = (int) (heroi.hp * 2); 
+        int larguraVida = (int) (heroi.hp * 2);
         g.fillRect(20, 20, larguraVida, 20);
 
         g.setColor(Color.WHITE);
