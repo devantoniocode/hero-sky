@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 public class Game extends JPanel {
     public HeroPlane heroi;
     public EnemyPlane[] inimigo;
+    private Som gerenciadorSom = new Som();
 
     public Sky sky_A;
     public Sky sky_B;
@@ -168,6 +169,7 @@ public class Game extends JPanel {
     }
 
     public void disparar() {
+        gerenciadorSom.tocar("disparo"); 
         heroi.disparando = true;
         heroi.frameDisparoAtual = 0;
         Projetil p = new Projetil();
@@ -199,6 +201,7 @@ public class Game extends JPanel {
             for (int j = 0; j < inimigo.length; j++) {
                 EnemyPlane e = inimigo[j];
                 if (p.getBounds().intersects(e.getBounds())) {
+                    gerenciadorSom.tocar("explosao");
                     listaExplosoes.add(new Explosao(e.posX, e.posY, spriteExplosao));
 
                     e.posX = 1300 + new Random().nextInt(400);

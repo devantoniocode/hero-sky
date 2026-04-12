@@ -67,7 +67,7 @@ public class HeroPlane {
     }
 
     public BufferedImage getImage(long tempoAtual) {
-        if ((tempoAtual - tempoUltimaTrocaVoo) >= 16.6) {// 16.6 ms => ~60fps
+        if ((tempoAtual - tempoUltimaTrocaVoo) >= 16.6) {//=> ms ~60fps
             frameVooAtual++;
             if (frameVooAtual > 1) {
                 frameVooAtual = 0;
@@ -78,7 +78,7 @@ public class HeroPlane {
     }
 
     public BufferedImage animacaoTiro(long tempoAtual) {
-        if ((tempoAtual - tempoUltimaTrocaDisparo) >= 50) {// 50
+        if ((tempoAtual - tempoUltimaTrocaDisparo) >= 50) {
             frameDisparoAtual++;
             if (frameDisparoAtual > 3) {
                 frameDisparoAtual = 0;
