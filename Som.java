@@ -6,7 +6,7 @@ import java.util.Map;
 public class Som {
     private Map<String, Clip[]> canaisSons = new HashMap<>();
     private Map<String, Integer> proximoCanal = new HashMap<>();
-    private float volumeHelice = 0.5f;
+    private float volumeHelice = 0.4f;
     private float volumeDisparo = 0.7f;
 
     public Som() {

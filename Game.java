@@ -375,10 +375,8 @@ public class Game extends JPanel {
             long tempoAgora = System.currentTimeMillis();
             BufferedImage imgHeroi = heroi.getImagemParaDesenhar(tempoAgora);
 
-            //   g.drawImage(imgHeroi, heroi.posX, heroi.posY, null);
-
             // DESENHA CENTRALIZADO NO EIXO ROTACIONADO
-            g2d.drawImage(imgHeroi, - heroi.largura / 2, - heroi.altura / 2, null);
+            g2d.drawImage(imgHeroi, -heroi.largura / 2, -heroi.altura / 2, null);
 
             g2d.setTransform(reset); // Restaura para os próximos desenhos serem retos
         }
@@ -401,17 +399,18 @@ public class Game extends JPanel {
 
     private void desenharInterface(Graphics g) {
         g.setColor(Color.RED);
-        g.fillRect(20, 20, 200, 20);
+        g.fillRect(20, 5, 200, 20);
 
         g.setColor(Color.GREEN);
         int larguraVida = (int) (heroi.hp * 2);
-        g.fillRect(20, 20, larguraVida, 20);
+        g.fillRect(20, 5, larguraVida, 20);
 
         g.setColor(Color.WHITE);
-        g.drawRect(20, 20, 200, 20);
+        g.drawRect(20, 5, 200, 20);
 
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("PONTOS: " + pontos, 250, 38);
+        g.drawString("PONTOS: " + pontos, 230, 20);
+        g.drawString("PAUSE (ESC)", 380, 20);
 
         if (heroi.hp <= 0) {
             g.setColor(new Color(0, 0, 0, 150));
